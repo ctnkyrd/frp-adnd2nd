@@ -14,7 +14,7 @@ router.get("/login", function(req, res){
 
 router.post("/login", passport.authenticate("local", 
     {
-    successRedirect: "/games",
+    successRedirect: "/users",
     failureRedirect: "/login"
     }), function(req, res){
         console.log(req.username);

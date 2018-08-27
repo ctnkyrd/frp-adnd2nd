@@ -6,12 +6,37 @@ var middleware = require("../middleware");
 
 //index route - show all users
 router.get("/", middleware.IsAdmin, function(req, res){
-    User.find({}, function(err, allUsers){
+    User.find({role: {$lt: 3} }, function(err, allUsers){
         if(err){
             console.log(err);
         } else{
             res.render("users/index", {users: allUsers, currentUser: req.user});
         }
+    });
+});
+
+//handle signup logic
+router.post("/", function(req, res) {
+   var newUser = new User({username: req.body.username, role: req.body.role});
+   User.register(newUser, req.body.password, function(err, user){
+       if(err){
+           req.flash("error", err.message);
+           return res.redirect("/users");
+       }
+       console.log(newUser);
+       res.redirect("/users");
+   })
+});
+
+
+//destroy user route
+router.delete("/:id", middleware.IsAdmin,function(req, res){
+    User.findByIdAndRemove(req.params.id, function(err){
+       if(err){
+           res.redirect("/users");
+       } else{
+           res.redirect("/users");
+       }
     });
 });
 
