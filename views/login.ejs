@@ -1,11 +1,19 @@
 <% include ./partials/header %>
 
-<h1>Login</h1>
 
+<div id="login-form" class="container">
+    <h1>Giriş</h1><hr>
 <form action="/login" method="POST">
-    <input type="text" name="username" placeholder="username">
-    <input type="password" name="password" placeholder="password">
-    <input type="submit" value="Login!">
+    <div class="form-group">
+    <input class="form-control form-control-lg" type="text" name="username" placeholder="Kullanıcı Adı">
+    </div>
+    <div class="form-group">
+    <input class="form-control form-control-lg" type="password" name="password" placeholder="Şifre">
+    </div>
+    <input class="btn btn-success" type="submit" value="Login!">
+    <a href="/register" class="btn btn-warning">Register</a>
 </form>
+
+</div>
 
 <% include ./partials/footer %>
