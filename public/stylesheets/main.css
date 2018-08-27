@@ -6,7 +6,7 @@
 #login-form{
     margin: 50px auto;
     padding: 30px;
-        background-color: #fdf8f8;
+    background-color: #fdf8f8;
     width: 500px;
 }
 #login-form .form-control input{
@@ -18,4 +18,11 @@
         width: 90%;
         margin:15px auto;
     }
+    
+    #login-form{
+    margin: 50px auto;
+    padding: 30px;
+    background-color: #fdf8f8;
+    width: 90%;
+}
 }
