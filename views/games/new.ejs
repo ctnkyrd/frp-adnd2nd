@@ -3,22 +3,24 @@
 <div class="container-fluid">
     <div class="row">
         <div class="new-form">
-            <form action="/games" method="POST">
-                <div class="form-group">
-                    <input class="form-control form-control-lg" type="text" name="name" placeholder="Name Of The Game">
-                </div>
-                <div class="form-group">
-                    <input class="form-control" type="email" name="email" placeholder="dm@email.com">
-                </div>
-                <div class"form-group" style="margin-bottom: 15px;">
-                    <textarea class="form-control" rows="4" name="description" placeholder="Write a short descriotion here"></textarea>
-                </div>
-                <div class="form-group">
-                    <button type="submit" class="btn btn-primary float-right">Create Game!</button>    
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
+<form action="/games" method="POST">
+    
+  <div class="form-group">
+    <label for="exampleFormControlInput1">Oyunun Adı</label>
+    <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Oyunun Adı" required> 
+  </div>
+  <div class="form-group">
+    <label for="exampleFormControlInput1">ST E-posta</label>
+    <input type="email" class="form-control" id="exampleFormControlInput1" name="email" placeholder="st@gmail.com"> 
+  </div>
+  
+  <div class="form-group">
+    <label for="exampleFormControlTextarea1">Oyunun Açıklaması</label>
+    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="description" placeholder="Oyunun Kısa Açıklaması"></textarea>
+  </div>
+  
+  <button type="submit" class="btn btn-dark btn-lg float-right">Kaydet</button>
+</form>
+</div></div></div>
 
 <% include ../partials/footer %>

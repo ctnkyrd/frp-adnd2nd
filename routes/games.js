@@ -1,10 +1,11 @@
 var express = require("express");
 var router = express.Router();
 var Game = require("../models/game");
+var middleware = require("../middleware");
 
 
 //index route - show all games
-router.get("/", function(req, res){
+router.get("/", middleware.IsAdmin, function(req, res){
     Game.find({}, function(err, allGames){
         if(err){
             console.log(err);

@@ -12,7 +12,8 @@ var express           = require("express"),
     
 //requiring routes
 var indexRoutes       = require("./routes/index"),
-    gameRoutes        = require("./routes/games");
+    gameRoutes        = require("./routes/games"),
+    userRoutes        = require("./routes/users");
     
 var dbUrl = process.env.DBCONNECTION || "mongodb://localhost/frpv1";
 mongoose.connect(dbUrl, { useNewUrlParser: true });
@@ -44,6 +45,7 @@ app.use(function(req, res, next){
 
 app.use("/", indexRoutes);
 app.use("/games", gameRoutes);
+app.use("/users", userRoutes);
 
 
 addAdmin();
