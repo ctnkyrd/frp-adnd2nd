@@ -14,7 +14,7 @@ var express           = require("express"),
 var indexRoutes       = require("./routes/index"),
     gameRoutes        = require("./routes/games");
     
-var dbUrl = process.env.DATABASEURL || "mongodb://localhost/frpv1";
+var dbUrl = process.env.DBCONNECTION || "mongodb://localhost/frpv1";
 mongoose.connect(dbUrl, { useNewUrlParser: true });
 
 app.use(bodyParser.urlencoded({extended: true}));
