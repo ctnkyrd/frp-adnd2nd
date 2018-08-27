@@ -1,0 +1,12 @@
+.new-form{
+    width: 50%;
+    margin:25px auto;
+}
+
+
+@media only screen and (max-width: 1200px) {
+    .new-form{
+        width: 90%;
+        margin:15px auto;
+    }
+}
