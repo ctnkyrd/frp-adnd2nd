@@ -5,7 +5,7 @@ var middleware = require("../middleware");
 
 
 //index route - show all games
-router.get("/", middleware.IsAdmin, function(req, res){
+router.get("/", middleware.isSt, function(req, res){
     Game.find({}, function(err, allGames){
         if(err){
             console.log(err);

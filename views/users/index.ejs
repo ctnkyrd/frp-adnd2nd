@@ -15,11 +15,72 @@
         <tr>
             <td><%= user.username %></td>
             <td class="role"><%= user.role %></td>
-            <td>
-                <form action="/users/<%= user._id %>?_method=DELETE" method="POST">
-                <button class="btn btn-outline-danger btn-sm">Sil</button>
-                </form>
-                </td>
+
+<td style="width:35%">
+  <div class="btn-group" role="group" aria-label="Basic example">
+<button type="button" class="btn btn-outline-danger float-right" data-toggle="modal" data-target="#sil-modal-<%= user._id %>">Sil</button>
+<button type="button"  class="btn btn-outline-danger float-right" data-toggle="modal" data-target="#edit-modal-<%= user._id %>">Değiştir</button>
+</div>
+
+<!-- Edit Modal -->
+<div class="modal fade bd-example-modal-sm" id="edit-modal-<%= user._id %>" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+     <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel"><%= user.username %></h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form action="/users/<%= user._id %>/?_method=PUT" method="POST">
+          <div class="form-group">
+            <label for="user-name" class="col-form-label">Kullanıcı Adı:</label>
+            <input type="text" class="form-control" name="user[username]" value="<%= user.username %>">
+          </div>
+     <div class="form-group">
+      <label  for="edit_user_role">Rolü</label>
+      <select class="form-control" name="user[role]">
+        <option value="2">ST</option>
+      </select>
+          </div>
+          <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Kapat</button>
+        <button type="submit" class="btn btn-success">Kaydet</button>
+      </div>
+        </form>
+      </div>
+      
+    </div>
+  </div>
+</div>
+
+           
+                
+<div class="modal fade bd-example-modal-sm" id="sil-modal-<%= user._id %>" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+     <div class="modal-header">
+        <h5 class="modal-title"><%= user.username %> Sil</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+          
+          <p><%= user.username %> adlı kullanıcıyı silmek istediğine emin misiniz?</p>
+        <form style="display:inline" action="/users/<%= user._id %>?_method=DELETE" method="POST">
+            <button class="btn btn-danger" type="submit">Sil</button>
+        </form>
+        
+        <button class="btn btn-success" data-dismiss="modal" aria-label="Close">Hayır</button>
+        
+      </div>
+      
+    </div>
+  </div>
+</div>
+</td>
         </tr>
         
         <% }) %>
@@ -27,10 +88,10 @@
     </table>
     
     
-<!-- Small modal -->
-<button type="button" class="btn btn-outline-dark float-right" data-toggle="modal" data-target=".bd-example-modal-sm">Kullanıcı Ekle</button>
+<!-- New User -->
+<button type="button" class="btn btn-outline-dark float-right" data-toggle="modal" data-target="#user-add-modal">Kullanıcı Ekle</button>
 
-<div class="modal fade bd-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+<div class="modal fade bd-example-modal-sm" id="user-add-modal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-sm">
     <div class="modal-content">
      <div class="modal-header">
@@ -52,13 +113,12 @@
      <div class="form-group">
       <label  for="inlineFormCustomSelect">Rolü</label>
       <select class="form-control" name="role" id="inlineFormCustomSelect">
-        <option selected>Seçiniz...</option>
         <option value="2">ST</option>
       </select>
           </div>
           <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Kapat</button>
-        <button type="submit" class="btn btn-outline-success">Kullanıcı Ekle</button>
+        <button type="button" class="btn btn-danger" data-dismiss="modal">İptal</button>
+        <button type="submit" class="btn btn-success">Kaydet</button>
       </div>
         </form>
       </div>

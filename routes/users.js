@@ -23,7 +23,6 @@ router.post("/", function(req, res) {
            req.flash("error", err.message);
            return res.redirect("/users");
        }
-       console.log(newUser);
        res.redirect("/users");
    })
 });
@@ -40,5 +39,15 @@ router.delete("/:id", middleware.IsAdmin,function(req, res){
     });
 });
 
+//Edit user route
+router.put("/:id", middleware.IsAdmin,function(req, res){
+    User.findByIdAndUpdate(req.params.id, req.body.user, function(err, updatedUser){
+       if(err){
+           console.log(err);
+       } else {
+           res.redirect("/users/");
+       }
+   });
+});
 
 module.exports = router;
