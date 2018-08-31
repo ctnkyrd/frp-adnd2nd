@@ -20,7 +20,9 @@
      <% if(!currentUser){ %>
     <a class="nav-item nav-link active" href="/login">Giriş</a>
     <% } else { %> 
+
     <a class="nav-item nav-link active" href="#"><strong><%= currentUser.username %></strong>, merhaba</a>
+        <a class="nav-item nav-link active" href="/games">Oyunlar</a>
     <a class="nav-item nav-link active" href="/logout">Çıkış</a>
     <% } %>
     </div>

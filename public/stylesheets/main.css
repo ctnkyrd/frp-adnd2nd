@@ -17,6 +17,19 @@
     margin-top: 25px;
 }
 
+.jumbotron {
+    margin-top: 25px;
+}
+
+.hidden{
+    display: none;
+}
+
+#pills-home{
+
+    padding: 10px;
+}
+
 @media only screen and (max-width: 1200px) {
     .new-form{
         width: 90%;
@@ -29,4 +42,9 @@
     background-color: #fdf8f8;
     width: 90%;
 }
+
+    .jumbotron {
+    margin-top: 15px;
+}
+
 }

@@ -13,8 +13,8 @@ function calcDate(date1,date2) {
     var message = "";
 
     message += days + " Gün " 
-    message += months + " Ay "
-    message += years + " Yıl \n"
+    //message += months + " Ay "
+    //message += years + " Yıl \n"
 
     return message
     }
@@ -22,6 +22,7 @@ function calcDate(date1,date2) {
 
 $('.time-diff').each(function(time){
     var date = new Date($(this).text()); 
-    $(this).text(calcDate(today, date)); 
+    $(this).text(calcDate(today, date));
+    $(this).removeClass('hidden');
 });
     

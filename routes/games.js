@@ -54,4 +54,18 @@ router.delete("/:id", middleware.checkGameOwnership,function(req, res){
     });
 });
 
+
+//show route
+router.get("/:id", function(req, res) {
+    Game.findById(req.params.id).populate("players").exec(function(err, foundGame){
+        if(err){console.log(err)}
+        else{
+            console.log(foundGame);
+            res.render("games/show", {game: foundGame});
+            
+        }
+    });
+   
+});
+
 module.exports = router;

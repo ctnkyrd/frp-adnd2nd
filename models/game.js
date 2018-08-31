@@ -17,6 +17,12 @@ var gameSchema = new mongoose.Schema({
          ref: "User"
       }
    ], 
+   sections: [
+      {
+         type: mongoose.Schema.Types.ObjectId,
+         ref: "Section"
+      }
+   ],
    gamestartdate: Date,
 });
  

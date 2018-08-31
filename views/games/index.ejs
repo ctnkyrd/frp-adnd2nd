@@ -18,11 +18,13 @@
   <div class="card-body">
     <h5 class="card-title"><%= game.name %></h5>
     <p class="card-text"><%= game.description %></p>
-    <a href="#" class="btn btn-primary">Detay</a>
+    <form style="display: inline" action="/games/<%= game.id %>" method="GET">
+      <button type="submit" class="btn btn-default">Detay</button>
+    </form>
     <button type="submit" class = "btn btn-danger" data-toggle="modal" data-target="#sil-modal-<%= game.id %>">Sil</button>
   </div>
   <div class="card-footer text-muted">
-    <span class="time-diff"><%= game.gamestartdate %></span>
+    <span class="time-diff hidden"><%= game.gamestartdate %></span>
     
   </div>
 </div>
