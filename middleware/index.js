@@ -52,6 +52,30 @@ middlewareObj.isSt = function (req, res, next){
 }
 
 
+middlewareObj.checkGameOwnership = function (req, res, next){
+        if(req.isAuthenticated()){
+            //otherwise, redirect
+            Games.findById(req.params.id, function(err, foundGame){
+               if(err) {
+                   req.flash("error", "Oyun Bulunamadı");
+                   res.redirect("back");
+               } else {
+                   //does the user owned the campground
+                   if(foundGame.dm.id.equals(req.user._id)){
+                       next();
+                   } else{
+                       req.flash("error", "Bunu Yapmaya Yetkiniz Yok");
+                       res.redirect("back");
+                   }
+               }
+            });
+        } else{
+            req.flash("error", "You need to be logged in to do that");
+            res.redirect("back");
+        }
+}
+
+
 
 middlewareObj.isLoggedIn = function (req, res, next){
     if(req.isAuthenticated()){

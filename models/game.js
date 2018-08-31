@@ -16,7 +16,8 @@ var gameSchema = new mongoose.Schema({
          type: mongoose.Schema.Types.ObjectId,
          ref: "User"
       }
-   ]
+   ], 
+   gamestartdate: Date,
 });
  
 module.exports = mongoose.model("Game", gameSchema);

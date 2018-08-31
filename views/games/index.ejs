@@ -3,15 +3,59 @@
 <div class="container">
 <header class="jumbotron">
     <div class="container">
-    <h1>AD&D 2<sup>nd</sup> Edition Game Track</h1>
-    <p>View All of the Games Worldwide!</p>
-    <p> <a href="/games/new" class="btn btn-primary btn-lg">Add New Game</a></p>
+    <h1>AD&D 2<sup>nd</sup> Edition Oyun Takip Uygulaması</h1>
+    <p>Tüm Oyunlarınızı Görüntüleyin ya da Yeni Oyun Ekleyin!</p>
+    <p> <a href="/games/new" class="btn btn-primary btn-lg">Yeni Oyun</a></p>
     </div>
 </header>
 
 
-        <h4>All Games Will Be Here</h4>
+<% games.forEach(function(game){%>
+<div class="card text-center">
+  <div class="card-header">
+    <%= currentUser.username %>
+  </div>
+  <div class="card-body">
+    <h5 class="card-title"><%= game.name %></h5>
+    <p class="card-text"><%= game.description %></p>
+    <a href="#" class="btn btn-primary">Detay</a>
+    <button type="submit" class = "btn btn-danger" data-toggle="modal" data-target="#sil-modal-<%= game.id %>">Sil</button>
+  </div>
+  <div class="card-footer text-muted">
+    <span class="time-diff"><%= game.gamestartdate %></span>
+    
+  </div>
+</div>
+
+
+<!--sil modal-->
+<div class="modal fade bd-example-modal-sm" id="sil-modal-<%= game.id %>" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+     <div class="modal-header">
+        <h5 class="modal-title"><%= game.name %> Sil</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+          
+          <p><%= game.name %> adlı oyunu silmek istediğinizden emin misiniz?</p>
+        <form style="display:inline" action="/games/<%= game.id %>?_method=DELETE" method="POST">
+            <button class="btn btn-danger btn-block" type="submit">Sil</button>
+        </form>
+        
+
+        
+      </div>
+      
+    </div>
+  </div>
+</div>
+
+<% }); %>
+
 
 </div>
 
-<% include ../partials/footer %>
+<% include ../partials/gamesFooter %>
