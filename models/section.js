@@ -1,10 +1,7 @@
 var mongoose = require("mongoose");
  
 var sectionSchema = new mongoose.Schema({
-   name: String,
-   description: String,
-   startdatetime: Date,
-   enddatetime: Date
+   name: String
 });
  
-module.exports = mongoose.model("Game", sectionSchema);
+module.exports = mongoose.model("Section", sectionSchema);

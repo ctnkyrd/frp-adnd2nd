@@ -10,6 +10,7 @@ router.get("/", middleware.isSt, function(req, res){
         if(err){
             console.log(err);
         } else{
+            console.log("game id---"+req.params.id)
             res.render("games/index", {games: allGames, currentUser: req.user});
         }
     });
@@ -57,10 +58,10 @@ router.delete("/:id", middleware.checkGameOwnership,function(req, res){
 
 //show route
 router.get("/:id",middleware.isLoggedIn, function(req, res) {
-    Game.findById(req.params.id).populate("players").exec(function(err, foundGame){
+    Game.findById(req.params.id).populate("sections").exec(function(err, foundGame){
         if(err){console.log(err)}
         else{
-            console.log(foundGame);
+            // console.log(foundGame);
             res.render("games/show", {game: foundGame});
             
         }
