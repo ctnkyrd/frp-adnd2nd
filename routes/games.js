@@ -2,6 +2,7 @@ var express = require("express");
 var router = express.Router();
 var Game = require("../models/game");
 var middleware = require("../middleware");
+var moment = require('moment');
 
 
 //index route - show all games
@@ -62,7 +63,7 @@ router.get("/:id",middleware.isLoggedIn, function(req, res) {
         if(err){console.log(err)}
         else{
             // console.log(foundGame);
-            res.render("games/show", {game: foundGame});
+            res.render("games/show", {game: foundGame, moment: moment});
             
         }
     });

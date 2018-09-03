@@ -21,6 +21,7 @@
     "express": "^4.16.3",
     "express-session": "^1.15.6",
     "method-override": "^3.0.0",
+    "moment": "^2.22.2",
     "mongoose": "^5.2.9",
     "passport": "^0.4.0",
     "passport-local": "^1.0.0",
