@@ -52,7 +52,7 @@
   <select class="form-control">
   <option selected>Seçiniz...</option>
   <% game.sections.forEach(function(section) { %>
-    <option value="<%= section._id %>"><%= moment(section.startdate).format('Do MMMM, YYYY'); %>/<%= section.name %></option>
+    <option value="<%= section._id %>"><%= moment(section.startdate).locale("tr").format('LL'); %>/<%= section.name %></option>
     <% }); %>
   </select>
   </div>
