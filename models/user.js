@@ -9,6 +9,12 @@ var UserSchema = new mongoose.Schema({
     surname: String,
     email: String,
     role: { type: Number, min: 0, max: 3},
+    game: {
+        id:{
+         type: mongoose.Schema.Types.ObjectId,
+         ref: "Game"
+      }
+    }
 });
 
 UserSchema.plugin(passportLocalMongoose);
