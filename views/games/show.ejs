@@ -34,43 +34,78 @@
 
 <div class="container">
   <div class="tab-content" id="pills-tabContent" style="width:100%;">
-    
-
-
-
-
-  </div>
   <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
-      <form class="form-inline" action="/games/<%= game._id %>/sections" method="POST">
-        <div class="form-row">
-          <div class="col">
-            <input type="text" class="form-control" name="section[name]" placeholder="Bölümün İsmi" required>
-          </div>
-          <div class="col">
-            <input class="form-control" type="date" name="section[startdate]" required>
-          </div>
-          <div class="col">
-            <button class="btn btn-outline-secondary" style="margin-bottom:10px;">Bölüm Ekle</button>
-          </div>
+    <form class="form-inline" action="/games/<%= game._id %>/sections" method="POST">
+      <div class="form-row">
+        <div class="col">
+          <input type="text" class="form-control" name="section[name]" placeholder="Bölümün İsmi" required>
         </div>
-      </form>
-      <form class="form-inline">
-        <div class="form-group col-md-4 col-sm-12" style="padding-left:0">
-          <select class="form-control">
-            <option selected>Seçiniz...</option>
-            <% game.sections.forEach(function(section) { %>
-            <option value="<%= section._id %>">
-              <%= moment(section.startdate).locale("tr").format('LL'); %>/
-              <%= section.name %>
-            </option>
-            <% }); %>
-          </select>
+        <div class="col">
+          <input class="form-control" type="date" name="section[startdate]" required>
         </div>
-      </form>
+        <div class="col">
+          <button class="btn btn-outline-secondary" style="margin-bottom:10px;">Bölüm Ekle</button>
+        </div>
+      </div>
+    </form>
+    <form class="form-inline">
+      <div class="form-group col-md-4 col-sm-12" style="padding-left:0">
+        <select class="form-control">
+          <option selected>Seçiniz...</option>
+          <% game.sections.forEach(function(section) { %>
+          <option value="<%= section._id %>">
+            <%= moment(section.startdate).locale("tr").format('LL'); %>/
+            <%= section.name %>
+          </option>
+          <% }); %>
+        </select>
+      </div>
+    </form>
+  </div>
+  <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
+    <div class="row">
+      <div class="col-md-6">
+        <button type="button" class="btn btn-outline-secondary" data-toggle="modal" data-target="#user-add-modal">Oyuncu
+          Ekle</button>
+      </div>
     </div>
-  <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">111</div>
+  </div>
   <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">12313123123</div>
 </div>
+</div>
+
+
+
+
+<!-- New player modal -->
+<div class="modal fade bd-example-modal-sm" id="user-add-modal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Kullanıcı Ekle</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form action="/games/<%= game._id %>/players" method="POST">
+          <div class="form-group">
+            <label for="user-name" class="col-form-label">Kullanıcı Adı:</label>
+            <input type="text" class="form-control" id="user-name" name="username" required>
+          </div>
+          <div class="form-group">
+            <label for="password" class="col-form-label">Şifre:</label>
+            <input type="password" class="form-control" id="password" name="password" required>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-danger" data-dismiss="modal">İptal</button>
+            <button type="submit" class="btn btn-success">Kaydet</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
 </div>
 
 
