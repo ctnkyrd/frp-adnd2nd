@@ -48,10 +48,10 @@
         </div>
       </div>
     </form>
-    <form class="form-inline">
+    <form class="form-inline" id="section-select">
       <div class="form-group col-md-4 col-sm-12" style="padding-left:0">
         <select class="form-control">
-          <option selected>Seçiniz...</option>
+          
           <% game.sections.forEach(function(section) { %>
           <option value="<%= section._id %>">
             <%= moment(section.startdate).locale("tr").format('LL'); %>/
@@ -61,6 +61,12 @@
         </select>
       </div>
     </form>
+    <!--section content -->
+    <hr>
+    <div id="section-content">
+      <h2></h2>
+    </div>
+
   </div>
   <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
     <div class="row">
@@ -73,8 +79,6 @@
   <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">12313123123</div>
 </div>
 </div>
-
-
 
 
 <!-- New player modal -->

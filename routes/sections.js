@@ -29,5 +29,29 @@ router.post("/",middleware.isLoggedIn, function(req, res){
     });
 });
 
+router.get("/", middleware.isLoggedIn, function(req, res){
+    Section.find({}, function(err, sections){
+        if(err){
+          console.log(err);
+        } else {
+          if(req.xhr) {
+              res.json(sections);
+          } else {
+              console.log("error get sections!");  
+          }
+        }
+      })
+});
+
+//show route
+router.get("/:section_id",middleware.isLoggedIn, function(req, res) {
+    Section.findById(req.params.section_id).exec(function(err, foundSection){
+        if(err){console.log(err)}
+        else{
+            res.json(foundSection);
+        }
+    });
+   
+});
 
 module.exports = router;

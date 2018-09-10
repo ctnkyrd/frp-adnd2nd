@@ -8,6 +8,7 @@ var express           = require("express"),
     User              = require("./models/user"),
     Game              = require("./models/game"),
     Char              = require("./models/character"),
+    expressSanitizer  = require("express-sanitizer"),
     methodOverride    = require("method-override");
     
 //requiring routes
@@ -24,6 +25,7 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.set("view engine", "ejs");
 app.use(express.static(__dirname + "/public"));
 app.use(methodOverride("_method"));
+app.use(expressSanitizer());
 app.use(flash());
 
 // PASSPORT CONFIGURATION
@@ -65,10 +67,10 @@ function addAdmin(){
 }
 
 
-// app.listen(process.env.PORT || 3000, process.env.IP || 'localhost', function(){
-//    console.log("The frpApp Server Started!");
-// });
+app.listen(process.env.PORT || 3000, process.env.IP || 'localhost', function(){
+   console.log("The frpApp Server Started!");
+});
 
-app.listen(process.env.PORT, process.env.IP, function(){
-    console.log("The frpApp Server Started!");
- });
+// app.listen(process.env.PORT, process.env.IP, function(){
+//     console.log("The frpApp Server Started!");
+//  });
