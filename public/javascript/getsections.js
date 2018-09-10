@@ -1,7 +1,7 @@
 // A $( document ).ready() block.
 $(document).ready(function () {
 
-    if(!$('#section-select select') === null){
+    if($('#section-select select') != null){
         var sectionItem = $('#section-select select').val();
         var gameId = window.location.href.split('//')[1].split('/')[2].replace('?', '');
         getSectionDetails(sectionItem, gameId);
