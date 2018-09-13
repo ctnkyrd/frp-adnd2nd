@@ -15,6 +15,7 @@ var express           = require("express"),
 var indexRoutes       = require("./routes/index"),
     gameRoutes        = require("./routes/games"),
     userRoutes        = require("./routes/users"),
+    commentRoutes     = require("./routes/comments"),
     sectionRoutes     = require("./routes/sections"),
     playerRoutes      = require("./routes/players");
     
@@ -51,6 +52,7 @@ app.use("/", indexRoutes);
 app.use("/games", gameRoutes);
 app.use("/users", userRoutes);
 app.use("/games/:id/sections", sectionRoutes);
+app.use("/games/:id/sections/:secion_id/comments", commentRoutes);
 app.use("/games/:id/players", playerRoutes);
 
 
@@ -67,10 +69,10 @@ function addAdmin(){
 }
 
 
-// app.listen(process.env.PORT || 3000, process.env.IP || 'localhost', function(){
-//    console.log("The frpApp Server Started!");
-// });
+app.listen(process.env.PORT || 3000, process.env.IP || 'localhost', function(){
+   console.log("The frpApp Server Started!");
+});
 
-app.listen(process.env.PORT, process.env.IP, function(){
-    console.log("The frpApp Server Started!");
- });
+// app.listen(process.env.PORT, process.env.IP, function(){
+//     console.log("The frpApp Server Started!");
+//  });

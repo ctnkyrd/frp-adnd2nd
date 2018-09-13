@@ -30,6 +30,34 @@
     padding: 10px;
 }
 
+.section-comments{
+    /* background-color: lightcoral; */
+    width: 100%;
+}
+
+textarea{
+    width: 100% !important;
+}
+
+.well{
+    text-align: right;
+}
+
+#comments-well{
+    background-color: #e1ece7;
+    padding: 20px;
+    min-height: 100px;
+    min-width: 100%;
+}
+
+.user-comment{
+    margin-bottom: 8px;
+}
+
+.comment-delete-form{
+    display: inline;
+}
+
 @media only screen and (max-width: 1200px) {
     .new-form{
         width: 90%;

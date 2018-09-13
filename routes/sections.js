@@ -37,7 +37,7 @@ router.get("/", middleware.isLoggedIn, function(req, res){
           if(req.xhr) {
               res.json(sections);
           } else {
-              console.log("error get sections!");  
+              console.log("error get sections!");
           }
         }
       })
@@ -45,7 +45,7 @@ router.get("/", middleware.isLoggedIn, function(req, res){
 
 //show route
 router.get("/:section_id",middleware.isLoggedIn, function(req, res) {
-    Section.findById(req.params.section_id).exec(function(err, foundSection){
+    Section.findById(req.params.section_id).populate("comments").exec(function(err, foundSection){
         if(err){console.log(err)}
         else{
             res.json(foundSection);
