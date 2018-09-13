@@ -49,6 +49,7 @@ $(document).ready(function () {
         var commentItem = $(this).serialize();
         var actionUrl = $(this).attr('action');
         $.post(actionUrl, commentItem, function(v) {
+            $('#comment-form textarea').val('');
             $('#comments-well').append(
                 `<div class="comment-div">
                 <p class="user-comment">${v.text}</p>
