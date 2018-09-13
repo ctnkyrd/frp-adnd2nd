@@ -44,6 +44,7 @@ $(document).ready(function () {
     //post comment
     $(document).on('submit','#comment-form', function(e) {
         debugger;
+        var sectionId = $('#section-select select').val();
         e.preventDefault();
         var commentItem = $(this).serialize();
         var actionUrl = $(this).attr('action');
