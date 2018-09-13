@@ -47,11 +47,13 @@ $(document).ready(function () {
         e.preventDefault();
         var commentItem = $(this).serialize();
         var actionUrl = $(this).attr('action');
-        $.post(actionUrl, commentItem, function(data) {
+        $.post(actionUrl, commentItem, function(v) {
             $('#comments-well').append(
-                `
-                <p class="user-comment">${data.text}</p>
-                <span><strong><i>${data.user.username}</i></strong></span>
+                `<div class="comment-div">
+                <p class="user-comment">${v.text}</p>
+                <span style="margin-right:5px;"><span style="font-size:0.8em; color: #a9a4a4; margin-right:10px">${moment(v.created).locale("tr").format('LLLL')}</span><strong><i>${v.user.username}</i></strong></span>
+                <form class="form-inline comment-delete-form" action="/games/`+gameId+`/sections/`+sectionId+`/comments/${v._id}" method="DELETE"><button class="btn btn-danger btn-sm">Sil</button></form>
+                <hr align="right" style="width:60%;"></div>
                 `
             );
         });
