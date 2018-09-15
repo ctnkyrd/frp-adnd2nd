@@ -73,6 +73,9 @@ function addAdmin(){
 //    console.log("The frpApp Server Started!");
 // });
 
-app.listen(process.env.PORT, process.env.IP, function(){
-    console.log("The frpApp Server Started!");
+const PORT = process.env.PORT || 3000;
+const IP = process.env.IP || 'localhost';
+
+app.listen(PORT, IP, function(){
+    console.log("The frpApp Server Started!", IP+":"+PORT);
  });
