@@ -33,7 +33,7 @@ $(document).ready(function () {
                     $('#comments-well').append(
                         `<div class="comment-div">
                         <p class="user-comment">${v.text}</p>
-                        <span style="margin-right:5px;"><span style="font-size:0.8em; color: #a9a4a4; margin-right:10px">${moment(v.created).locale("tr").format('LLLL')}</span><strong><i>${v.user.username}</i></strong></span>
+                        <span style="margin-right:5px;"><span style="font-size:0.8em; color: #a9a4a4; margin-right:10px">${moment(v.created).locale("tr").format('LLL')}</span><strong><i>${v.user.username}</i></strong></span>
                         <form class="form-inline comment-delete-form" action="/games/`+gameId+`/sections/`+sectionId+`/comments/${v._id}" method="DELETE"><button class="btn btn-danger btn-sm">Sil</button></form>
                         <hr align="right" style="width:60%;"></div>
                         `
@@ -42,7 +42,7 @@ $(document).ready(function () {
                     $('#comments-well').append(
                         `<div class="comment-div">
                         <p class="user-comment">${v.text}</p>
-                        <span style="margin-right:5px;"><span style="font-size:0.8em; color: #a9a4a4; margin-right:10px">${moment(v.created).locale("tr").format('LLLL')}</span><strong><i>${v.user.username}</i></strong></span>
+                        <span style="margin-right:5px;"><span style="font-size:0.8em; color: #a9a4a4; margin-right:10px">${moment(v.created).locale("tr").format('LLL')}</span><strong><i>${v.user.username}</i></strong></span>
                         <hr align="right" style="width:60%;"></div>
                         `
                     );
@@ -97,7 +97,7 @@ $(document).ready(function () {
             $('#comment-form').before(
                 `<div class="comment-div">
                 <p class="user-comment">${v.text}</p>
-                <span style="margin-right:5px;"><span style="font-size:0.8em; color: #a9a4a4; margin-right:10px">${moment(v.created).locale("tr").format('LLLL')}</span><strong><i>${v.user.username}</i></strong></span>
+                <span style="margin-right:5px;"><span style="font-size:0.8em; color: #a9a4a4; margin-right:10px">${moment(v.created).locale("tr").format('LLL')}</span><strong><i>${v.user.username}</i></strong></span>
                 <form class="form-inline comment-delete-form" action="/games/`+gameId+`/sections/`+sectionId+`/comments/${v._id}" method="DELETE"><button class="btn btn-danger btn-sm">Sil</button></form>
                 <hr align="right" style="width:60%;"></div>
                 `
