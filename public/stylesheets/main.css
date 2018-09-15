@@ -77,6 +77,12 @@ textarea{
     text-decoration: none;
 }
 
+h4>span{
+    font-size: .7em;
+    color: lightgray;
+    font-style: italic;
+}
+
 @media only screen and (max-width: 1200px) {
     .new-form{
         width: 90%;

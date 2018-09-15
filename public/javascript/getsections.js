@@ -24,19 +24,30 @@ $(document).ready(function () {
 
         //make get request to induvidual section and get date/description and all user comments also show comment editor
         $.get('/games/'+gameId+'/sections/'+sectionId, function(data){
-            $('#section-content h2').text(data.name + "-" + moment(data.startdate).locale("tr").format('LL'));
+            $('#section-content h4').html(data.foundSection.name + "-<span>" + moment(data.foundSection.startdate).locale("tr").format('LL')+"</span>");
             $('#section-content .section-comments').append('<form id="comment-form" class="form-inline" action="/games/'+gameId+'/sections/'+sectionId+'/comments" method="POST"><span>Yorum Ekle</span><textarea class="form-control"  rows="3" name="comment[text]" placeholder="..."></textarea><button type="submit" class="btn btn-outline-secondary float-right" style="margin-top:10px;">Yorum Ekle</button></form>');
-            
-            $.each(data.comments, function(k, v) {
+            var currentUser = data.currentUser;
+            $.each(data.foundSection.comments, function(k, v) {
                 /// do stuff
-                $('#comments-well').append(
-                    `<div class="comment-div">
-                    <p class="user-comment">${v.text}</p>
-                    <span style="margin-right:5px;"><span style="font-size:0.8em; color: #a9a4a4; margin-right:10px">${moment(v.created).locale("tr").format('LLLL')}</span><strong><i>${v.user.username}</i></strong></span>
-                    <form class="form-inline comment-delete-form" action="/games/`+gameId+`/sections/`+sectionId+`/comments/${v._id}" method="DELETE"><button class="btn btn-danger btn-sm">Sil</button></form>
-                    <hr align="right" style="width:60%;"></div>
-                    `
-                );
+                if(currentUser._id === v.user.id){
+                    $('#comments-well').append(
+                        `<div class="comment-div">
+                        <p class="user-comment">${v.text}</p>
+                        <span style="margin-right:5px;"><span style="font-size:0.8em; color: #a9a4a4; margin-right:10px">${moment(v.created).locale("tr").format('LLLL')}</span><strong><i>${v.user.username}</i></strong></span>
+                        <form class="form-inline comment-delete-form" action="/games/`+gameId+`/sections/`+sectionId+`/comments/${v._id}" method="DELETE"><button class="btn btn-danger btn-sm">Sil</button></form>
+                        <hr align="right" style="width:60%;"></div>
+                        `
+                    );
+                } else {
+                    $('#comments-well').append(
+                        `<div class="comment-div">
+                        <p class="user-comment">${v.text}</p>
+                        <span style="margin-right:5px;"><span style="font-size:0.8em; color: #a9a4a4; margin-right:10px">${moment(v.created).locale("tr").format('LLLL')}</span><strong><i>${v.user.username}</i></strong></span>
+                        <hr align="right" style="width:60%;"></div>
+                        `
+                    );
+                }
+                
             });
             
         });
@@ -59,8 +70,8 @@ $(document).ready(function () {
 		                <div class="card-body text-dark">
                             <h5 class="card-title">${v.username}</h5>
                             <p class="text-truncate" class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                            <form style="display:inline">
-                                <a href="#" class="btn btn-dark btn-sm">Karakter Detayları</a>
+                            <form style="display:inline" action="/games/${gameId}/characters/${v._id}" method="GET">
+                            <button type="submit" class="btn btn-dark btn-sm">Karakter Detayları</button>
                             </form>
                             <form class="user-delete-form" style="display:inline" action="/users/${v._id}" method="DELETE">
                                 <button type="submit" class="btn btn-danger btn-sm">Sil</button>

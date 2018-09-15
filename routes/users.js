@@ -3,6 +3,7 @@ var router = express.Router({mergeParams: true});
 var User = require("../models/user");
 var middleware = require("../middleware");
 var Game = require("../models/game");
+var Char = require("../models/character");
 
 
 //index route - show all users
@@ -29,7 +30,7 @@ router.post("/", function(req, res) {
 });
 
 
-//add player to game route
+//add player to game route also creates the character basic game id and user id
 router.post("/:id", function(req, res) {
     var newUser = new User({username: req.body.user.username, role: 1, game:{id:req.params.id}});
     Game.findById(req.params.id, function(err,foundGame){
@@ -42,6 +43,11 @@ router.post("/:id", function(req, res) {
                     return res.redirect("/games");
                 }
                 else {
+                    Char.create({user: {id: newUser._id}, game:{id: foundGame._id}}, function(err, newChar){
+                        if(err){
+                            console.log(err);
+                        }
+                     });
                     foundGame.players.push(user);
                     foundGame.save();
                     res.redirect("/games/"+foundGame._id);
