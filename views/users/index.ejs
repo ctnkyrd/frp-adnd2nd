@@ -143,29 +143,3 @@
 </div>
 <% include ../partials/footer %>
 
-<script>
-  // A $( document ).ready() block.
-  $(document).ready(function () {
-    $('.role').each(function (role) {
-      var roleNo = $(this).text();
-      $(this).text(whoIs(roleNo));
-    });
-  });
-
-
-  function whoIs(elem) {
-    switch (elem) {
-      case "3":
-        return 'Administrator';
-        break;
-      case "2":
-        return 'DM';
-        break;
-      case "1":
-        return 'Player';
-        break;
-      default:
-        alert('Nobody!');
-    }
-  }
-</script>
