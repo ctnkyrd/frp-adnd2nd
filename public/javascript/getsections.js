@@ -65,6 +65,7 @@ $(document).ready(function () {
     function getPlayersOfTheGame(gameId){
         $.get('/games/'+gameId, function(data){
             $.each(data.players, function(k, v){
+                debugger
                 $('#game-players').append(`
                 <div class="col-sm-12 col-md-4 user-container">
 	                <div class="card border-dark mb-3" style="">
@@ -72,7 +73,7 @@ $(document).ready(function () {
 		                <div class="card-body text-dark">
                             <h5 class="card-title">${v.username}</h5>
                             <p class="text-truncate" class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                            <form style="display:inline" action="/games/${gameId}/characters/${v._id}" method="GET">
+                            <form style="display:inline" action="/games/${gameId}/characters/${v.character.id}" method="GET">
                             <button type="submit" class="btn btn-dark btn-sm">Karakter Detayları</button>
                             </form>
                             <form class="user-delete-form" style="display:inline" action="/users/${v._id}" method="DELETE">

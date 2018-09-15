@@ -25,6 +25,16 @@
     display: none;
 }
 
+.sheet-logo{
+    width: 50%
+}
+.char-sheet{
+    width: 100%;
+}
+.char-sheet>tbody>tr>td{
+    width: 50%;
+}
+
 #pills-home{
 
     /* padding: 10px; */

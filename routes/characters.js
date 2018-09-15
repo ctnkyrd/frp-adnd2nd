@@ -6,7 +6,13 @@ var middleware = require("../middleware");
 
 
 router.get("/:char_id", middleware.checkCharOwnership, function(req, res){
-    res.send("Selamlar Beyler!!");
+    Char.findById(req.params.char_id, function(err, foundChar){
+        if(err){
+            console.log(err);
+        } else{
+            res.render("characters/show", {char: foundChar});
+        }
+    })
 });
 
 

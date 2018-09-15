@@ -49,6 +49,8 @@ router.post("/:id", function(req, res) {
                         } else {
                             foundGame.players.push(user);
                             foundGame.save();
+                            user.character.id = newChar._id;
+                            user.save();
                             res.json({user: user, char: newChar});
                         }
                      });

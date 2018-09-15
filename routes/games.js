@@ -1,6 +1,7 @@
 var express = require("express");
 var router = express.Router();
 var Game = require("../models/game");
+var Char = require("../models/character");
 var middleware = require("../middleware");
 var moment = require('moment');
 
@@ -56,7 +57,7 @@ router.delete("/:id", middleware.checkGameOwnership,function(req, res){
 
 //show route
 router.get("/:id",middleware.isLoggedIn, function(req, res) {
-    Game.findById(req.params.id).populate("sections").populate("players").exec(function(err, foundGame){
+    Game.findById(req.params.id).populate("sections").populate("players").populate("characters").exec(function(err, foundGame){
         if(err){console.log(err)}
         else{
             if(req.xhr){
