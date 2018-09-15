@@ -100,4 +100,9 @@ h4>span{
     margin-top: 15px;
 }
 
+ .card {
+     margin: 0 auto;
+     max-width: 90%;
+ }
+
 }

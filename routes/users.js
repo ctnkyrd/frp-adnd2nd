@@ -46,11 +46,13 @@ router.post("/:id", function(req, res) {
                     Char.create({user: {id: newUser._id}, game:{id: foundGame._id}}, function(err, newChar){
                         if(err){
                             console.log(err);
+                        } else {
+                            foundGame.players.push(user);
+                            foundGame.save();
+                            res.json({user: user, char: newChar});
                         }
                      });
-                    foundGame.players.push(user);
-                    foundGame.save();
-                    res.redirect("/games/"+foundGame._id);
+
                 }
             });
         }

@@ -67,7 +67,7 @@ $(document).ready(function () {
             $.each(data.players, function(k, v){
                 $('#game-players').append(`
                 <div class="col-sm-12 col-md-4 user-container">
-	                <div class="card border-dark mb-3" style="max-width: 18rem;">
+	                <div class="card border-dark mb-3" style="">
 		                <div class="card-header">Header</div>
 		                <div class="card-body text-dark">
                             <h5 class="card-title">${v.username}</h5>
@@ -94,7 +94,7 @@ $(document).ready(function () {
         var actionUrl = $(this).attr('action');
         $.post(actionUrl, commentItem, function(v) {
             $('#comment-form textarea').val('');
-            $('#comments-well').append(
+            $('#comment-form').before(
                 `<div class="comment-div">
                 <p class="user-comment">${v.text}</p>
                 <span style="margin-right:5px;"><span style="font-size:0.8em; color: #a9a4a4; margin-right:10px">${moment(v.created).locale("tr").format('LLLL')}</span><strong><i>${v.user.username}</i></strong></span>
@@ -123,6 +123,33 @@ $(document).ready(function () {
         } else {
             $(this).find('button').blur();
         }
+    });
+    //add player form
+    $(document).on('submit','#new-user-form', function(e) {
+        var gameId = window.location.href.split('//')[1].split('/')[2].replace('?', '');
+        e.preventDefault();
+        var player = $(this).serialize();
+        var actionUrl = $(this).attr('action');
+        $.post(actionUrl, player, function(v) {
+            $('#user-add-modal').modal('toggle');
+            $('#game-players').append(`
+            <div class="col-sm-12 col-md-4 user-container">
+                <div class="card border-dark mb-3" style="">
+                    <div class="card-header">Header</div>
+                    <div class="card-body text-dark">
+                        <h5 class="card-title">${v.user.username}</h5>
+                        <p class="text-truncate" class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                        <form style="display:inline" action="/games/${gameId}/characters/${v.char._id}" method="GET">
+                        <button type="submit" class="btn btn-dark btn-sm">Karakter Detayları</button>
+                        </form>
+                        <form class="user-delete-form" style="display:inline" action="/users/${v.user._id}" method="DELETE">
+                            <button type="submit" class="btn btn-danger btn-sm">Sil</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        `);
+        });
     });
 
     //delete user

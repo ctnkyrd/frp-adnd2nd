@@ -123,7 +123,7 @@
         </button>
       </div>
       <div class="modal-body">
-        <form action="/users/<%= game._id %>" method="POST">
+        <form id="new-user-form" action="/users/<%= game._id %>" method="POST">
           <div class="form-group">
             <label for="user-name" class="col-form-label">Kullanıcı Adı:</label>
             <input type="text" class="form-control" id="user-name" name="user[username]" required>
