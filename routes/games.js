@@ -11,7 +11,6 @@ router.get("/", middleware.isSt, function(req, res){
         if(err){
             console.log(err);
         } else{
-            console.log("game id---"+req.params.id)
             res.render("games/index", {games: allGames, currentUser: req.user});
         }
     });
@@ -33,14 +32,12 @@ router.post("/",middleware.isSt, function(req, res){
        if(err){
            console.log(err);
        } else{
-           console.log(newlycreated);
            res.redirect("/games");
        }
     });
 });
 
 router.get("/new",middleware.isSt, function(req, res){
-   console.log(req.user);
    res.render("games/new");
 });
 
@@ -62,7 +59,6 @@ router.get("/:id",middleware.isLoggedIn, function(req, res) {
     Game.findById(req.params.id).populate("sections").exec(function(err, foundGame){
         if(err){console.log(err)}
         else{
-            // console.log(foundGame);
             res.render("games/show", {game: foundGame, moment: moment});
             
         }

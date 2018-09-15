@@ -10,7 +10,6 @@ middlewareObj.IsAdmin = function (req, res, next){
            if(err) {
                res.redirect("back");
            } else {
-               console.log(foundUser);
                //the user is admin?
                if(foundUser.role === req.user.role){
                    next();
@@ -34,7 +33,6 @@ middlewareObj.isSt = function (req, res, next){
            if(err) {
                res.redirect("back");
            } else {
-               console.log(foundUser);
                //the user is admin?
                if(foundUser.role >= 2){
                    next();

@@ -20,7 +20,6 @@ router.post("/",middleware.isLoggedIn, function(req, res){
                    section.save();
                    game.sections.push(section);
                    game.save();
-                   console.log(section);
                    req.flash("success", "Successfully added section");
                    res.redirect("/games/" + game._id);
                }
@@ -34,11 +33,7 @@ router.get("/", middleware.isLoggedIn, function(req, res){
         if(err){
           console.log(err);
         } else {
-          if(req.xhr) {
-              res.json(sections);
-          } else {
-              console.log("error get sections!");
-          }
+            res.json(sections);
         }
       })
 });

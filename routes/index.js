@@ -27,7 +27,6 @@ router.post("/login", passport.authenticate("local",
     successRedirect: "/dashboard",
     failureRedirect: "/login"
     }), function(req, res){
-        console.log(req.username);
     });
 
 router.get("/logout", function(req, res) {

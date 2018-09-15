@@ -27,7 +27,6 @@ router.post("/",middleware.isLoggedIn, function(req, res){
                    comment.save();
                    section.comments.push(comment);
                    section.save();
-                   console.log(comment);
                    res.json(comment);
                }
            });
