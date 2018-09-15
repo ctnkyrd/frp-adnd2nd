@@ -1,6 +1,9 @@
 // A $( document ).ready() block.
 $(document).ready(function () {
 
+    //read more and less
+    readMoreAndLess();
+
     if($('#section-select select') != null){
         var sectionItem = $('#section-select select').val();
         var gameId = window.location.href.split('//')[1].split('/')[2].replace('?', '');
@@ -55,7 +58,7 @@ $(document).ready(function () {
 		                <div class="card-header">Header</div>
 		                <div class="card-body text-dark">
                             <h5 class="card-title">${v.username}</h5>
-                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                            <p class="text-truncate" class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
                             <form style="display:inline">
                                 <a href="#" class="btn btn-dark btn-sm">Karakter Detayları</a>
                             </form>
@@ -129,4 +132,42 @@ $(document).ready(function () {
         }
     });
 
+    //read more and less
+    function readMoreAndLess(){
+        var showChar = 200;  // How many characters are shown by default
+    var ellipsestext = "...";
+    var moretext = "Daha fazla";
+    var lesstext = "Daha Az";
+    
+
+    $('.more').each(function() {
+        var content = $(this).html();
+ 
+        if(content.length > showChar) {
+ 
+            var c = content.substr(0, showChar);
+            var h = content.substr(showChar, content.length - showChar);
+ 
+            var html = c + '<span class="moreellipses">' + ellipsestext+ '&nbsp;</span><span class="morecontent"><span>' + h + '</span>&nbsp;&nbsp;<a href="" class="morelink">' + moretext + '</a></span>';
+ 
+            $(this).html(html);
+        }
+ 
+    });
+ 
+    $(".morelink").click(function(){
+        if($(this).hasClass("less")) {
+            $(this).removeClass("less");
+            $(this).html(moretext);
+        } else {
+            $(this).addClass("less");
+            $(this).html(lesstext);
+        }
+        $(this).parent().prev().toggle();
+        $(this).prev().toggle();
+        return false;
+    });
+
+    }
+    
 });
