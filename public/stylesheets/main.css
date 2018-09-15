@@ -35,6 +35,10 @@
     width: 100%;
 }
 
+#section-content {
+    font-family: 'Raleway', sans-serif;
+}
+
 textarea{
     width: 100% !important;
 }

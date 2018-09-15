@@ -26,7 +26,6 @@ var charSchema = new mongoose.Schema({
    charclass: String,
    level: { type: Number, min: 0, max: 30},
    currentxp: Number
-   
 });
  
 module.exports = mongoose.model("Char", charSchema);

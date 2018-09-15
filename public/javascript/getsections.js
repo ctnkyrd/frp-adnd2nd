@@ -15,12 +15,10 @@ $(document).ready(function () {
     });
 
     function getSectionDetails(sectionId, gameId){
-        debugger;
         $('#section-content h2').text('');
         $('#comments-well').empty();
         $('#comment-form').remove();
 
-        // $('#section-content .section-comments').innerHTML = '';
         //make get request to induvidual section and get date/description and all user comments also show comment editor
         $.get('/games/'+gameId+'/sections/'+sectionId, function(data){
             $('#section-content h2').text(data.name + "-" + moment(data.startdate).locale("tr").format('LL'));
@@ -41,9 +39,39 @@ $(document).ready(function () {
         });
     }
 
+    $('#pills-profile-tab').click(function(){
+        
+        var gameId = window.location.href.split('//')[1].split('/')[2].replace('?', '');
+        $('#game-players div').remove();
+        getPlayersOfTheGame(gameId);
+    })
+
+    function getPlayersOfTheGame(gameId){
+        $.get('/games/'+gameId, function(data){
+            $.each(data.players, function(k, v){
+                $('#game-players').append(`
+                <div class="col-sm-12 col-md-4 user-container">
+	                <div class="card border-dark mb-3" style="max-width: 18rem;">
+		                <div class="card-header">Header</div>
+		                <div class="card-body text-dark">
+                            <h5 class="card-title">${v.username}</h5>
+                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                            <form style="display:inline">
+                                <a href="#" class="btn btn-dark btn-sm">Karakter Detayları</a>
+                            </form>
+                            <form class="user-delete-form" style="display:inline" action="/users/${v._id}" method="DELETE">
+                                <button type="submit" class="btn btn-danger btn-sm">Sil</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            `);
+            });
+        });
+    }
+
     //post comment
     $(document).on('submit','#comment-form', function(e) {
-        debugger;
         var sectionId = $('#section-select select').val();
         e.preventDefault();
         var commentItem = $(this).serialize();
@@ -81,5 +109,24 @@ $(document).ready(function () {
         }
     });
 
-   
+    //delete user
+    $(document).on('submit', '.user-delete-form', function(e) {
+        e.preventDefault();
+        var confirmResponse = confirm('Emin misiniz?');
+        if(confirmResponse) {
+            var actionUrl = $(this).attr('action');
+            $itemToDelete = $(this).closest('.user-container');
+            $.ajax({
+                url: actionUrl,
+                type: 'DELETE',
+                itemToDelete: $itemToDelete,
+                success: function(data) {
+                    this.itemToDelete.remove();
+                }
+            })
+        } else {
+            $(this).find('button').blur();
+        }
+    });
+
 });

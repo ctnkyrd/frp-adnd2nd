@@ -1,7 +1,8 @@
 var express = require("express");
-var router = express.Router();
+var router = express.Router({mergeParams: true});
 var User = require("../models/user");
 var middleware = require("../middleware");
+var Game = require("../models/game");
 
 
 //index route - show all users
@@ -28,13 +29,40 @@ router.post("/", function(req, res) {
 });
 
 
+//add player to game route
+router.post("/:id", function(req, res) {
+    var newUser = new User({username: req.body.user.username, role: 1, game:{id:req.params.id}});
+    Game.findById(req.params.id, function(err,foundGame){
+        if(err){
+            console.log(err);
+        } else{
+            User.register(newUser, req.body.user.password, function(err, user){
+                if(err){
+                    req.flash("error", err.message);
+                    return res.redirect("/games");
+                }
+                else {
+                    foundGame.players.push(user);
+                    foundGame.save();
+                    res.redirect("/games/"+foundGame._id);
+                }
+            });
+        }
+    });    
+ });
+
+
 //destroy user route
 router.delete("/:id", middleware.IsAdmin,function(req, res){
-    User.findByIdAndRemove(req.params.id, function(err){
+    User.findByIdAndRemove(req.params.id, function(err, user){
        if(err){
            res.redirect("/users");
        } else{
-           res.redirect("/users");
+           if(req.xhr){
+             res.json(user);
+           } else{
+             res.redirect("/users");
+           }
        }
     });
 });

@@ -32,55 +32,76 @@
   <hr>
 </div>
 
+<!--TAB CONTENT-->
 <div class="container">
   <div class="tab-content" id="pills-tabContent" style="width:100%;">
-  <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
-    <form class="form-inline" action="/games/<%= game._id %>/sections" method="POST">
-      <div class="form-row">
-        <div class="col">
-          <input type="text" class="form-control" name="section[name]" placeholder="Bölümün İsmi" required>
+
+    <!--Sections TAB CONTENT-->
+    <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
+      <form class="form-inline" action="/games/<%= game._id %>/sections" method="POST">
+        <div class="form-row">
+          <div class="col">
+            <input type="text" class="form-control" name="section[name]" placeholder="Bölümün İsmi" required>
+          </div>
+          <div class="col">
+            <input class="form-control" type="date" name="section[startdate]" required>
+          </div>
+          <div class="col">
+            <button class="btn btn-outline-secondary" style="margin-bottom:10px;">Bölüm Ekle</button>
+          </div>
         </div>
-        <div class="col">
-          <input class="form-control" type="date" name="section[startdate]" required>
+      </form>
+      <form class="form-inline" id="section-select">
+        <div class="form-group col-md-4 col-sm-12" style="padding-left:0">
+          <select class="form-control">
+
+            <% game.sections.forEach(function(section) { %>
+            <option value="<%= section._id %>">
+              <%= moment(section.startdate).locale("tr").format('LL'); %>/
+              <%= section.name %>
+            </option>
+            <% }); %>
+          </select>
         </div>
-        <div class="col">
-          <button class="btn btn-outline-secondary" style="margin-bottom:10px;">Bölüm Ekle</button>
+      </form>
+      <hr>
+      <div id="section-content">
+        <h2></h2>
+        <div class="well" id="comments-well">
+
         </div>
-      </div>
-    </form>
-    <form class="form-inline" id="section-select">
-      <div class="form-group col-md-4 col-sm-12" style="padding-left:0">
-        <select class="form-control">
-          
-          <% game.sections.forEach(function(section) { %>
-          <option value="<%= section._id %>">
-            <%= moment(section.startdate).locale("tr").format('LL'); %>/
-            <%= section.name %>
-          </option>
-          <% }); %>
-        </select>
-      </div>
-    </form>
-    <!--section content -->
-    <hr>
-    <div id="section-content">
-      <h2></h2>
-      <div class="well" id="comments-well"></div>
-      <div class="section-comments">
-        
+        <div class="section-comments">
+
+        </div>
       </div>
     </div>
+    <!--Sections TAB CONTENT-->
 
-  </div>
-  <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
+
+    <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
+      <div class="row" id="game-players">
+        <div class="col-sm-12 col-md-4">
+          <div class="card border-dark mb-3" style="max-width: 18rem;">
+            <div class="card-header">Header</div>
+            <div class="card-body text-dark">
+              <h5 class="card-title">Dark card title</h5>
+              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
+                card's content.</p>
+            </div>
+          </div>
+        </div>
+      </div>
     <div class="row">
       <div class="col-md-6">
-        <button type="button" class="btn btn-outline-secondary" data-toggle="modal" data-target="#user-add-modal">Oyuncu
-          Ekle</button>
+        <button type="button" class="btn btn-outline-secondary" data-toggle="modal" data-target="#user-add-modal">
+          Yeni Oyuncu Ekle
+        </button>
       </div>
+
     </div>
   </div>
-  <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">12313123123</div>
+
+  <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">contacct</div>
 </div>
 </div>
 
@@ -91,20 +112,20 @@
   <div class="modal-dialog modal-sm">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Kullanıcı Ekle</h5>
+        <h5 class="modal-title">Kullanıcı Ekle</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
-        <form action="/games/<%= game._id %>/players" method="POST">
+        <form action="/users/<%= game._id %>" method="POST">
           <div class="form-group">
             <label for="user-name" class="col-form-label">Kullanıcı Adı:</label>
-            <input type="text" class="form-control" id="user-name" name="username" required>
+            <input type="text" class="form-control" id="user-name" name="user[username]" required>
           </div>
           <div class="form-group">
             <label for="password" class="col-form-label">Şifre:</label>
-            <input type="password" class="form-control" id="password" name="password" required>
+            <input type="password" class="form-control" id="password" name="user[password]" required>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-danger" data-dismiss="modal">İptal</button>

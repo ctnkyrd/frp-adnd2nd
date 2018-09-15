@@ -56,11 +56,15 @@ router.delete("/:id", middleware.checkGameOwnership,function(req, res){
 
 //show route
 router.get("/:id",middleware.isLoggedIn, function(req, res) {
-    Game.findById(req.params.id).populate("sections").exec(function(err, foundGame){
+    Game.findById(req.params.id).populate("sections").populate("players").exec(function(err, foundGame){
         if(err){console.log(err)}
         else{
-            res.render("games/show", {game: foundGame, moment: moment});
-            
+            if(req.xhr){
+                res.json(foundGame);
+            }
+            else{
+                res.render("games/show", {game: foundGame, moment: moment});
+            }
         }
     });
    
