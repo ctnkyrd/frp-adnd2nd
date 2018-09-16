@@ -32,7 +32,7 @@
     width: 100%;
 }
 .char-sheet>tbody>tr>td{
-    width: 50%;
+    /* width: 50%; */
 }
 
 #pills-home{
@@ -91,6 +91,18 @@ h4>span{
     font-size: .7em;
     color: lightgray;
     font-style: italic;
+}
+
+#char-save-button{
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
+}
+
+.char-sheet-container{
+    background-color: #f8f9fa;
+    padding: 20px;
+    font-family: 'Raleway', sans-serif;
 }
 
 @media only screen and (max-width: 1200px) {
