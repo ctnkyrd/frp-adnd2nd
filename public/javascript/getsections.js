@@ -64,19 +64,20 @@ $(document).ready(function () {
 
     function getPlayersOfTheGame(gameId){
         $.get('/games/'+gameId, function(data){
-            $.each(data.players, function(k, v){
+            $.each(data.characters, function(k, v){
                 debugger
                 $('#game-players').append(`
                 <div class="col-sm-12 col-md-4 user-container">
 	                <div class="card border-dark mb-3" style="">
-		                <div class="card-header">Header</div>
+		                <div class="card-header">${v.name}</div>
 		                <div class="card-body text-dark">
-                            <h5 class="card-title">${v.username}</h5>
-                            <p class="text-truncate" class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                            <form style="display:inline" action="/games/${gameId}/characters/${v.character.id}" method="GET">
+                            <h5 class="card-title">${v.user.username}</h5>
+                            <p class="text-truncate" class="card-text">Karakter Class: ${v.charclass}</p>
+                            <p class="text-truncate" class="card-text">${v.description}</p>
+                            <form style="display:inline" action="/games/${gameId}/characters/${v._id}" method="GET">
                             <button type="submit" class="btn btn-dark btn-sm">Karakter Detayları</button>
                             </form>
-                            <form class="user-delete-form" style="display:inline" action="/users/${v._id}" method="DELETE">
+                            <form class="user-delete-form" style="display:inline" action="/users/${v.user.id}" method="DELETE">
                                 <button type="submit" class="btn btn-danger btn-sm">Sil</button>
                             </form>
                         </div>
@@ -132,14 +133,15 @@ $(document).ready(function () {
         var player = $(this).serialize();
         var actionUrl = $(this).attr('action');
         $.post(actionUrl, player, function(v) {
+            debugger
             $('#user-add-modal').modal('toggle');
             $('#game-players').append(`
             <div class="col-sm-12 col-md-4 user-container">
                 <div class="card border-dark mb-3" style="">
-                    <div class="card-header">Header</div>
+                    <div class="card-header">${v.user.username}</div>
                     <div class="card-body text-dark">
-                        <h5 class="card-title">${v.user.username}</h5>
-                        <p class="text-truncate" class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                        <h5 class="card-title">-</h5>
+                        <p class="text-truncate" class="card-text">Karakter Class:-</p>
                         <form style="display:inline" action="/games/${gameId}/characters/${v.char._id}" method="GET">
                         <button type="submit" class="btn btn-dark btn-sm">Karakter Detayları</button>
                         </form>
