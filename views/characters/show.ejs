@@ -8,7 +8,10 @@
         <fieldset disabled>
             <hr>
             <div class="row">
-                <div class="col-md-8">
+                    <div class="col-md-4" style="text-align:center">
+                            <img class="sheet-logo" src="https://i2.wp.com/www.pvv.ntnu.no/~leirbakk/rpg/adnd/graphics/adnd_logo.gif">
+                        </div>
+                <div class="col-md-8" style="margin-top: 20px;">
                     <div class="input-group">
                         <div class="input-group-prepend">
                             <span class="input-group-text" id="">İsim / Soyisim</span>
@@ -17,10 +20,9 @@
                         <input type="text" class="form-control" name="char[surname]" value="<%= char.surname %>">
                     </div>
                 </div>
-                <div class="col-md-4">
-                    <img class="sheet-logo" src="https://i2.wp.com/www.pvv.ntnu.no/~leirbakk/rpg/adnd/graphics/adnd_logo.gif">
-                </div>
+                
             </div>
+            <hr>
             <div class="row">
                 <div class="col-md-12">
                     <div class="form-group">
@@ -39,7 +41,7 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-md-2">
+                <div class="col-lg-2 col-md-3">
                     <div class="input-group input-group-sm mb-3">
                         <div class="input-group-prepend">
                             <span class="input-group-text" id="char-str">STR</span>
@@ -48,7 +50,7 @@
                             aria-describedby="char-str">
                     </div>
                 </div>
-                <div class="col-md-2">
+                <div class="col-lg-2 col-md-3 col-sm-6 col-xs-6">
                     <div class="input-group input-group-sm mb-3">
                         <div class="input-group-prepend">
                             <span class="input-group-text" id="char-dex">DEX</span>
@@ -57,7 +59,7 @@
                             aria-describedby="char-dex">
                     </div>
                 </div>
-                <div class="col-md-2">
+                <div class="col-lg-2 col-md-3 col-sm-6 col-xs-6">
                     <div class="input-group input-group-sm mb-3">
                         <div class="input-group-prepend">
                             <span class="input-group-text" id="char-con">CON</span>
@@ -66,7 +68,7 @@
                             aria-describedby="char-con">
                     </div>
                 </div>
-                <div class="col-md-2">
+                <div class="col-lg-2 col-md-3 col-sm-6 col-xs-6">
                     <div class="input-group input-group-sm mb-3">
                         <div class="input-group-prepend">
                             <span class="input-group-text" id="char-int">INT</span>
@@ -75,7 +77,7 @@
                             aria-describedby="char-int">
                     </div>
                 </div>
-                <div class="col-md-2">
+                <div class="col-lg-2 col-md-3 col-sm-6 col-xs-6">
                     <div class="input-group input-group-sm mb-3">
                         <div class="input-group-prepend">
                             <span class="input-group-text" id="char-wis">WIS</span>
@@ -84,7 +86,7 @@
                             aria-describedby="char-wis">
                     </div>
                 </div>
-                <div class="col-md-2">
+                <div class="col-lg-2 col-md-3 col-sm-6 col-xs-6">
                     <div class="input-group input-group-sm mb-3">
                         <div class="input-group-prepend">
                             <span class="input-group-text" id="char-char">CHAR</span>
@@ -124,7 +126,7 @@
                     </div>
                 </div>
             </div>
-
+            <button type="submit" id="char-save-button-mobile" class="btn btn-success btn-lg">Kaydet</button>
             <button type="submit" id="char-save-button" class="btn btn-success btn-lg">Kaydet</button>
         </fieldset>
     </form>

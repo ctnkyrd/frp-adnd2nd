@@ -26,7 +26,7 @@
 }
 
 .sheet-logo{
-    width: 50%
+    width: 60%;
 }
 .char-sheet{
     width: 100%;
@@ -98,6 +98,9 @@ h4>span{
     right: 10px;
     bottom: 10px;
 }
+#char-save-button-mobile{
+    display: none;
+}
 
 .char-sheet-container{
     background-color: #f8f9fa;
@@ -105,7 +108,7 @@ h4>span{
     font-family: 'Raleway', sans-serif;
 }
 
-@media only screen and (max-width: 1200px) {
+@media only screen and (max-width: 800px) {
     .new-form{
         width: 90%;
         margin:15px auto;
@@ -126,5 +129,17 @@ h4>span{
      margin: 0 auto;
      max-width: 90%;
  }
+
+ #fieldset-toggle{
+     width: 100%;
+ }
+
+ #char-save-button{
+    display: none;
+}
+#char-save-button-mobile{
+    display: block;
+    width: 100%;
+}
 
 }
