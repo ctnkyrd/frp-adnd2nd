@@ -17,7 +17,7 @@
     </div>
   </div>
 
-  <% if(currentUser.role === 3){ %>
+  <% if(currentUser.role >= 2){ %>
 
   <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
     <li class="nav-item">
@@ -43,7 +43,7 @@
 
     <!--Sections TAB CONTENT-->
     <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
-        <% if(currentUser.role === 3){ %>
+        <% if(currentUser.role >= 2){ %>
       <form class="form-inline" action="/games/<%= game._id %>/sections" method="POST">
         <div class="form-row">
           <div class="col">
