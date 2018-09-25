@@ -8,7 +8,7 @@
     <% } else if (currentUser.role === 3) { %>
     <p class="lead">Ana Sayfaya Hoşgeldin!, Kullanıcıları Görüntülemek için <a href="/users">buradan devam edin!</a></p>
   </div> <% } else if(currentUser.role === 1) { %>
-    <p class="lead">Ana Sayfaya Hoşgeldin!, Karakterini Görüntülemek için <a href="/character/<%= currentUser._id %>">buradan devam edin!</a></p>
+    <p class="lead">Ana Sayfaya Hoşgeldin!, Oyununu Görüntülemek için <a href="/games/<%= currentUser.game.id %>">buradan devam edin!</a></p>
     <% } else {%> 
     <p class="lead">Kullanıcı tanımlanamadı!</p> <% } %>
 </div>

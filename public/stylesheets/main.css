@@ -25,14 +25,28 @@
     display: none;
 }
 
+.sheet-logo{
+    width: 60%;
+}
+.char-sheet{
+    width: 100%;
+}
+.char-sheet>tbody>tr>td{
+    /* width: 50%; */
+}
+
 #pills-home{
 
-    padding: 10px;
+    /* padding: 10px; */
 }
 
 .section-comments{
     /* background-color: lightcoral; */
     width: 100%;
+}
+
+#section-content {
+    font-family: 'Raleway', sans-serif;
 }
 
 textarea{
@@ -44,7 +58,7 @@ textarea{
 }
 
 #comments-well{
-    background-color: #e1ece7;
+    background-color: #e9ecef99;;
     padding: 20px;
     min-height: 100px;
     min-width: 100%;
@@ -58,7 +72,43 @@ textarea{
     display: inline;
 }
 
-@media only screen and (max-width: 1200px) {
+/* read more & less */
+.morecontent span {
+    display: none;
+}
+.morelink {
+    display: block;
+    color: lightslategray;
+    font-size: 0.7em;
+    text-align: right;
+}
+.morelink:hover {
+    color: lightslategray;
+    text-decoration: none;
+}
+
+h4>span{
+    font-size: .7em;
+    color: lightgray;
+    font-style: italic;
+}
+
+#char-save-button{
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
+}
+#char-save-button-mobile{
+    display: none;
+}
+
+.char-sheet-container{
+    background-color: #f8f9fa;
+    padding: 20px;
+    font-family: 'Raleway', sans-serif;
+}
+
+@media only screen and (max-width: 800px) {
     .new-form{
         width: 90%;
         margin:15px auto;
@@ -73,6 +123,23 @@ textarea{
 
     .jumbotron {
     margin-top: 15px;
+}
+
+ .card {
+     margin: 0 auto;
+     max-width: 90%;
+ }
+
+ #fieldset-toggle{
+     width: 100%;
+ }
+
+ #char-save-button{
+    display: none;
+}
+#char-save-button-mobile{
+    display: block;
+    width: 100%;
 }
 
 }

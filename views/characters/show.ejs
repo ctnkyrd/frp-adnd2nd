@@ -1,0 +1,149 @@
+<% include ../partials/header %>
+
+<a href="/games/"
+<div class="container char-sheet-container">
+    <button type="button" id="fieldset-toggle" class="btn btn-secondary btn-sm" onclick="editCharSheet();">Düzenle</button>
+    <button type="button" id="fieldset-unToggle" class="btn btn-secondary btn-sm" onclick="lockCharSheet();" style="display:none;">Kilitle</button>
+    <form action="/games/<%= char.game.id %>/characters/<%= char._id %>?_method=PUT" method="POST">
+        <fieldset disabled>
+            <hr>
+            <div class="row">
+                    <div class="col-md-4" style="text-align:center">
+                            <img class="sheet-logo" src="https://i2.wp.com/www.pvv.ntnu.no/~leirbakk/rpg/adnd/graphics/adnd_logo.gif">
+                        </div>
+                <div class="col-md-8" style="margin-top: 20px;">
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="">İsim / Soyisim</span>
+                        </div>
+                        <input type="text" class="form-control" name="char[name]" value="<%= char.name %>">
+                        <input type="text" class="form-control" name="char[surname]" value="<%= char.surname %>">
+                    </div>
+                </div>
+                
+            </div>
+            <hr>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label for="char-description">Karakter Özeti</label>
+                        <textarea class="form-control" id="char-description" rows="3" name="char[description]"><%= char.description %></textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <h5>Fiziksel Yetenekleri</h5>
+                    <small id="passwordHelpInline" class="text-muted">
+                        1-25 Arasındaki Değerler Geçerlidir.
+                    </small>
+                    <hr>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-2 col-md-3">
+                    <div class="input-group input-group-sm mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="char-str">STR</span>
+                        </div>
+                        <input type="number" step="0.01" class="form-control" aria-label="Small" name="char[str]" value="<%= char.str %>"
+                            aria-describedby="char-str">
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-3 col-sm-6 col-xs-6">
+                    <div class="input-group input-group-sm mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="char-dex">DEX</span>
+                        </div>
+                        <input type="number" class="form-control" aria-label="Small" name="char[dex]" value="<%= char.dex %>"
+                            aria-describedby="char-dex">
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-3 col-sm-6 col-xs-6">
+                    <div class="input-group input-group-sm mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="char-con">CON</span>
+                        </div>
+                        <input type="number" class="form-control" aria-label="Small" name="char[con]" value="<%= char.con %>"
+                            aria-describedby="char-con">
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-3 col-sm-6 col-xs-6">
+                    <div class="input-group input-group-sm mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="char-int">INT</span>
+                        </div>
+                        <input type="number" class="form-control" aria-label="Small" name="char[int]" value="<%= char.int %>"
+                            aria-describedby="char-int">
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-3 col-sm-6 col-xs-6">
+                    <div class="input-group input-group-sm mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="char-wis">WIS</span>
+                        </div>
+                        <input type="number" class="form-control" aria-label="Small" name="char[wis]" value="<%= char.wis %>"
+                            aria-describedby="char-wis">
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-3 col-sm-6 col-xs-6">
+                    <div class="input-group input-group-sm mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="char-char">CHAR</span>
+                        </div>
+                        <input type="number" class="form-control" aria-label="Small" name="char[char]" value="<%= char.char %>"
+                            aria-describedby="char-char">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <label class="input-group-text" for="char-charclass">Class</label>
+                        </div>
+                        <select class="custom-select" id="char-charclass" name="char[charclass]">
+                            <% 
+                                    //got class list from mongoose modal enum values...
+                                    var classes = ["Fighter", "Wizard", "Thief", "Priest", "Paladin", "Druid"];
+                                    var hasClass = 0;
+                                    classes.forEach(function(c){ %>
+                            <% if(char.charclass === c){ hasClass = 1; %>
+                            <option selected value="<%= c %>">
+                                <%= c %>
+                            </option>
+                            <% } else{ %>
+                            <option value="<%= c %>">
+                                <%= c %>
+                            </option>
+                            <% }
+                                        }); if(hasClass === 0){ %>
+                            <option selected value="NoClass">
+                                Seçiniz...
+                            </option>
+                            <% } %>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <button type="submit" id="char-save-button-mobile" class="btn btn-success btn-lg">Kaydet</button>
+            <button type="submit" id="char-save-button" class="btn btn-success btn-lg">Kaydet</button>
+        </fieldset>
+    </form>
+</div>
+
+<script>
+    function editCharSheet(){
+      $('fieldset').attr('disabled', false);
+      $('#fieldset-toggle').css('display','none');
+      $('#fieldset-unToggle').attr('style', 'display: block');
+    }
+
+    function lockCharSheet(){
+        $('fieldset').attr('disabled', true);
+        $('#fieldset-toggle').css('display','block');
+        $('#fieldset-unToggle').attr('style', 'display: none');
+    }
+</script>
+
+<% include ../partials/gamesFooter %>

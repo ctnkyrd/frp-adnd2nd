@@ -6,7 +6,7 @@ var middleware = require("../middleware");
 
 
 //Sections Create
-router.post("/",middleware.isLoggedIn, function(req, res){
+router.post("/",middleware.checkGameOwnership, function(req, res){
     Game.findById(req.params.id, function(err, game) {
        if(err){
            console.log(err);
@@ -20,7 +20,6 @@ router.post("/",middleware.isLoggedIn, function(req, res){
                    section.save();
                    game.sections.push(section);
                    game.save();
-                   console.log(section);
                    req.flash("success", "Successfully added section");
                    res.redirect("/games/" + game._id);
                }
@@ -34,11 +33,7 @@ router.get("/", middleware.isLoggedIn, function(req, res){
         if(err){
           console.log(err);
         } else {
-          if(req.xhr) {
-              res.json(sections);
-          } else {
-              console.log("error get sections!");
-          }
+            res.json(sections);
         }
       })
 });
@@ -48,7 +43,7 @@ router.get("/:section_id",middleware.isLoggedIn, function(req, res) {
     Section.findById(req.params.section_id).populate("comments").exec(function(err, foundSection){
         if(err){console.log(err)}
         else{
-            res.json(foundSection);
+            res.json({foundSection: foundSection, currentUser: req.user});
         }
     });
    

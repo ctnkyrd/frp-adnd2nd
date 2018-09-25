@@ -1,6 +1,7 @@
 var express = require("express");
 var router = express.Router();
 var Game = require("../models/game");
+var Char = require("../models/character");
 var middleware = require("../middleware");
 var moment = require('moment');
 
@@ -11,7 +12,6 @@ router.get("/", middleware.isSt, function(req, res){
         if(err){
             console.log(err);
         } else{
-            console.log("game id---"+req.params.id)
             res.render("games/index", {games: allGames, currentUser: req.user});
         }
     });
@@ -33,14 +33,12 @@ router.post("/",middleware.isSt, function(req, res){
        if(err){
            console.log(err);
        } else{
-           console.log(newlycreated);
            res.redirect("/games");
        }
     });
 });
 
 router.get("/new",middleware.isSt, function(req, res){
-   console.log(req.user);
    res.render("games/new");
 });
 
@@ -59,12 +57,15 @@ router.delete("/:id", middleware.checkGameOwnership,function(req, res){
 
 //show route
 router.get("/:id",middleware.isLoggedIn, function(req, res) {
-    Game.findById(req.params.id).populate("sections").exec(function(err, foundGame){
+    Game.findById(req.params.id).populate("sections").populate("players").populate("characters").exec(function(err, foundGame){
         if(err){console.log(err)}
         else{
-            // console.log(foundGame);
-            res.render("games/show", {game: foundGame, moment: moment});
-            
+            if(req.xhr){
+                res.json(foundGame);
+            }
+            else{
+                res.render("games/show", {game: foundGame, moment: moment});
+            }
         }
     });
    

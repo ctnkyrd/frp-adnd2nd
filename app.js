@@ -16,8 +16,8 @@ var indexRoutes       = require("./routes/index"),
     gameRoutes        = require("./routes/games"),
     userRoutes        = require("./routes/users"),
     commentRoutes     = require("./routes/comments"),
-    sectionRoutes     = require("./routes/sections"),
-    playerRoutes      = require("./routes/players");
+    characterRoutes   = require("./routes/characters"),
+    sectionRoutes     = require("./routes/sections");
     
 var dbUrl = process.env.DBCONNECTION || "mongodb://localhost/frpv1";
 mongoose.connect(dbUrl, { useNewUrlParser: true });
@@ -53,7 +53,7 @@ app.use("/games", gameRoutes);
 app.use("/users", userRoutes);
 app.use("/games/:id/sections", sectionRoutes);
 app.use("/games/:id/sections/:secion_id/comments", commentRoutes);
-app.use("/games/:id/players", playerRoutes);
+app.use("/games/:id/characters", characterRoutes);
 
 
 addAdmin();
@@ -69,10 +69,13 @@ function addAdmin(){
 }
 
 
-app.listen(process.env.PORT || 3000, process.env.IP || 'localhost', function(){
-   console.log("The frpApp Server Started!");
-});
+// app.listen(process.env.PORT , process.env.IP , function(){
+//    console.log("The frpApp Server Started!");
+// });
 
-// app.listen(process.env.PORT, process.env.IP, function(){
-//     console.log("The frpApp Server Started!");
-//  });
+const PORT = process.env.PORT || 3000;
+const IP = process.env.IP || 'localhost';
+
+app.listen(PORT, IP, function(){
+    console.log("The frpApp Server Started!", IP+":"+PORT);
+ });

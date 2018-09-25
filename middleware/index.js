@@ -1,5 +1,7 @@
+var mongoose = require("mongoose");
 var Games = require("../models/game");
 var User = require("../models/user");
+var Char = require("../models/character");
 
 var middlewareObj = {};
 
@@ -10,7 +12,6 @@ middlewareObj.IsAdmin = function (req, res, next){
            if(err) {
                res.redirect("back");
            } else {
-               console.log(foundUser);
                //the user is admin?
                if(foundUser.role === req.user.role){
                    next();
@@ -34,7 +35,6 @@ middlewareObj.isSt = function (req, res, next){
            if(err) {
                res.redirect("back");
            } else {
-               console.log(foundUser);
                //the user is admin?
                if(foundUser.role >= 2){
                    next();
@@ -70,9 +70,29 @@ middlewareObj.checkGameOwnership = function (req, res, next){
                }
             });
         } else{
-            req.flash("error", "You need to be logged in to do that");
+            req.flash("error", "Önce Giriş Yapmanız Lazım");
             res.redirect("back");
         }
+}
+
+
+middlewareObj.checkCharOwnership = function(req, res, next){
+    if(req.isAuthenticated()){
+        Games.findById(req.params.id, function(err, foundGame){
+            if(err){
+                console.log(err);
+            } else{
+                if(foundGame.dm.id.equals(req.user._id)){
+                    next();
+                } else if(req.user._id.equals(req.params.char_id)){
+                    next();
+                }
+            }
+        });
+    } else {
+        req.flash("error", "Önce Giriş Yapmanız Lazım");
+        res.redirect("back");
+    }
 }
 
 
